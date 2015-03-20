@@ -1,4 +1,4 @@
-var app = angular.module('flapperNews', ['ui.router']);
+var app = angular.module('flapperNews', ['ui.router']);//, 'angularMoment']);
 
 app.controller('MainCtrl', [
     '$scope',
@@ -35,6 +35,7 @@ app.controller('PostsCtrl', [
     function ($scope, posts, post) {
 
         $scope.post = post;
+        $scope.sortBy = '-title';
 
         $scope.addComment = function(){
             if($scope.body === '') { return; }

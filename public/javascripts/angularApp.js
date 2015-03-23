@@ -1,4 +1,4 @@
-var app = angular.module('flapperNews', ['ui.router']);//, 'angularMoment']);
+var app = angular.module('flapperNews', ['ui.router', 'angularMoment']);
 
 app.controller('MainCtrl', [
     '$scope',
@@ -8,6 +8,13 @@ app.controller('MainCtrl', [
         $scope.test = 'Hello world!';
 
         $scope.posts = posts.posts;
+
+        $scope.sortTypes = [
+            {value: "-title", label: "Por título"},
+            {value: "-upvotes", label: "Por votos"},
+            {value: "-date", label: "Por fecha"}
+        ];
+        $scope.sortBy = $scope.sortTypes[0].value;
 
         $scope.addPost = function () {
             if (!$scope.title || $scope.title === '') {
@@ -35,7 +42,6 @@ app.controller('PostsCtrl', [
     function ($scope, posts, post) {
 
         $scope.post = post;
-        $scope.sortBy = '-title';
 
         $scope.addComment = function(){
             if($scope.body === '') { return; }

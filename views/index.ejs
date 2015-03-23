@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
 
     <title>Flapper News</title>
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
-    <!--<script src="components/moment/moment.js"></script>-->
-    <!--<script src="components/angular-moment/angular-moment.js"></script>-->
-    <!--<script src="components/moment/locale/es.js"></script>-->
+    <script src="/components/angular/angular.min.js"></script>
+    <script src="/components/ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/components/moment/min/moment.min.js"></script>
+    <script src="/components/moment/locale/es.js"></script>
+    <script src="/components/angular-moment/angular-moment.min.js"></script>
+
     <script src="/javascripts/angularApp.js"></script>
 
     <style>
@@ -40,10 +41,7 @@
 
     <div>
         <span>Ordenar por:</span>
-        <select ng-model="sortBy">
-            <option value="-title">Por título</option>
-            <option value="-upvotes">Por votos</option>
-            <option value="-date">Por fecha</option>
+        <select ng-model="sortBy" ng-options="item.value as item.label for item in sortTypes">
         </select>
     </div>
 
@@ -59,8 +57,9 @@
             </span>
         </span>
         <span>
-            <a ui-sref="posts({id : post._id})">({{post.comments.length}}) Comments</a>
+            <a ui-sref="posts({id : post._id})">({{post.comments.length}}) Comments</a> -
         </span>
+        <span am-time-ago="post.date"></span>
     </div>
 
     <form ng-submit="addPost()" style="margin-top:30px;">
@@ -110,6 +109,7 @@
         <span style="font-size:20px; margin-left:10px;">
             {{comment.body}}
         </span>
+        <span am-time-ago="comment.date"></span>
     </div>
 
     <form ng-submit="addComment()" style="margin-top:30px;">
